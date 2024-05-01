@@ -19,6 +19,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+import { HoveredLink, Menu, MenuItem, ProductItem } from "./navbar-menu";
+
 export const FloatingNav = ({
   navItems,
   className,
@@ -27,6 +29,12 @@ export const FloatingNav = ({
     name: string;
     link: string;
     icon?: JSX.Element;
+    // element?: {
+    //   name: string;
+    //   desc: string;
+    //   img?: string;
+    //   link: string;
+    // }
   }[];
   className?: string;
 }) => {
@@ -34,6 +42,8 @@ export const FloatingNav = ({
   const { scrollYProgress } = useScroll();
 
   const [visible, setVisible] = useState(false);
+  
+  const [active, setActive] = useState<string | null>(null);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     // Check if current is not undefined and is a number
